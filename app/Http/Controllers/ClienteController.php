@@ -92,6 +92,14 @@ class ClienteController extends Controller
             'latitud' => 'required',
             'longitud' => 'required',
         ]);
+        //obtenemos el campo file definido en el formulario
+        $file = $request->file('file');
+
+       //obtenemos el nombre del archivo
+        $nombre = $file->getClientOriginalName();
+        //movemos la foto a la carpeta fotos de public/fotos
+        $file->move(public_path('fotos'), $nombre);
+
         $cliente = new Cliente();
         $cliente->nombre = $request->nombre;
         $cliente->direccion = $request->direccion;
@@ -100,6 +108,7 @@ class ClienteController extends Controller
         $cliente->precio = $request->precio;
         $cliente->latitud = $request->latitud;
         $cliente->longitud = $request->longitud;
+        $cliente->avatar = $nombre;
         $cliente->save();
 
         $year = Carbon::now()->format('Y'); 
@@ -128,10 +137,35 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        $clientes = Cliente::findOrFail($id);
+                  
+        $clientes = Cliente::findOrFail($id);        
+        //MAPA$config = array();
+        $config['center'] = $clientes->latitud.','.$clientes->longitud;
+        $config['zoom'] = 16;
+        $config['disableDoubleClickZoom'] = true;
+        $config['scrollwheel'] = false;
+        $config['map_type'] = 'SATELLITE';
+        $config['disableMapTypeControl'] = true;
+        $config['disableStreetViewControl'] = true;
+        
+        
+        app('map')->initialize($config);
+        //COLOCAMOS MARCADOR PRINCIPAL TORRE
+        $marker = array();
+        $marker['position'] = '-17.021696, -72.002026';        
+        $marker['icon'] = 'https://chart.googleapis.com/chart?chst=d_map_spin&chld=0.9|0|008F39|11|b|TIFANET';
+        app('map')->add_marker($marker);
+
+        $marker = array();
+        $marker['position'] = $clientes->latitud.','.$clientes->longitud;
+        $marker['infowindow_content'] = $clientes->nombre;                     
+        app('map')->add_marker($marker);
+
+        $map = app('map')->create_map();
         $pagos = Pago::where('cliente_id', $id)->get();
-        return view('clientedetalle', compact(array('clientes', 'pagos')));
+        return view('clientedetalle', compact(array('clientes', 'pagos','map')));
     }
+
 
     /**
      * Show the form for editing the specified resource.

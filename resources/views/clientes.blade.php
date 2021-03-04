@@ -39,7 +39,7 @@
                       {{ $item->id }}
                       </td>
                       <td class="text-center">
-                      {{$item->nombre}}
+                      <a href="{{url('detalle/'.$item->id)}}">{{$item->nombre}}</a>
                       </td>                      
                       <td class="project-state">
                           {{ $item->direccion }}

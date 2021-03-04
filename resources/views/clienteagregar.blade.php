@@ -60,59 +60,41 @@
                 </font></font></div>
                   
                   @enderror
-                  <form method="POST" action="{{ route('clientes.agregar') }}">
+                  <form method="POST" action="{{ route('clientes.agregar') }}" accept-charset="UTF-8" enctype="multipart/form-data">
                     @csrf
-                    <input
-                      type="text"
-                      name="nombre"
-                      placeholder="Nombre"
-                      class="form-control mb-2"
-                      value="{{ old('nombre') }}"
-                    />
-                    <input
-                      type="text"
-                      name="direccion"
-                      placeholder="Direccion"
-                      class="form-control mb-2"
-                      value="{{ old('direccion') }}"
-                    />
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Email"
-                      class="form-control mb-2"
-                      value="{{ old('email') }}"
-                    />
-                    <input
-                      type="tel"
-                      name="telefono"
-                      placeholder="Telefono"
-                      class="form-control mb-2"
-                      value="{{ old('telefono') }}"
-                    />
-                    <input
-                      type="number"
-                      name="precio"
-                      placeholder="Cobro Mensual"
-                      class="form-control mb-2"
-                      value="{{ old('precio') }}"
-                    />
-                    <input
-                      type="text"
-                      name="latitud"
-                      id="latitud"
-                      placeholder="Latitud"
-                      class="form-control mb-2"
-                      value="{{ old('latitud') }}"
-                    />
-                    <input
-                      type="text"
-                      name="longitud"
-                      id="longitud"
-                      placeholder="Longitud"
-                      class="form-control mb-2"
-                      value="{{ old('longitud') }}"
-                    />
+                    <div class="row">
+                      <div class="col">
+                        <input  type="text" name="nombre" placeholder="Nombre" class="form-control mb-2" value="{{ old('nombre') }}" />
+                      </div>
+                      <div class="col">
+                        <input  type="text" name="direccion" placeholder="Direccion" class="form-control mb-2" value="{{ old('direccion') }}" />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <input  type="email" name="email" placeholder="Email" class="form-control mb-2" value="{{ old('email') }}" />
+                      </div>
+                      <div class="col">
+                        <input  type="tel" name="telefono" placeholder="Telefono" class="form-control mb-2" value="{{ old('telefono') }}" />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <input  type="number" name="precio" placeholder="Cobro Mensual" class="form-control mb-2" 
+                        value="{{ old('precio') }}" />
+                      </div>
+                      <div class="col">
+                        <input type="file" class="form-control-file mb-2" id="file" name="file" value="{{ old('file') }}">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <input  type="text" name="latitud" id="latitud"placeholder="Latitud" class="form-control mb-2" value="{{ old('latitud') }}" />
+                      </div>
+                      <div class="col">
+                        <input  type="text" name="longitud" id="longitud" placeholder="Longitud" class="form-control mb-2" value="{{ old('longitud') }}" />
+                      </div>
+                    </div>
                     <button class="btn btn-primary btn-block" type="submit">Agregar</button>
                   </form>
                 </div>                

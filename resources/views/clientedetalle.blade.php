@@ -8,12 +8,6 @@
 <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-            <div class="callout callout-info">
-              <h5><i class="fas fa-info"></i> Nota:</h5>
-              Esta pagina muestra informacion detallada del {{$clientes->nombre}}
-            </div>
-
-
             <!-- Main content -->
             <div class="invoice p-3 mb-3">
               <!-- title row -->
@@ -26,19 +20,35 @@
                 <!-- /.col -->
               </div>
               <!-- info row -->
-              <div class="row invoice-info">
-                <div class="col-sm-4 invoice-col">
+              <div class="row">
+                <div class="col-6">
                   <address>
                     <i class="fas fa-building"></i><b> Direccion:</b> {{$clientes->direccion}}<br>
-                    <i class="fas fa-phone"></i><b> Telefono:</b> {{$clientes->telefono}}<br>
+                    <i class="fas fa-phone"></i><b> Telefono:</b> <a href="https://api.whatsapp.com/send?phone=+51{{$clientes->telefono}}">+51 {{$clientes->telefono}}</a><br>
                     <i class="fas fa-envelope"></i><b> Email:</b> {{$clientes->email}}
                   </address>
                 </div>                
                 <!-- /.col -->
-                <div class="col-sm-4 invoice-col">
+                <div class="col-6">
                   <b>Fecha Actual:</b>  {{ now() }}<br>
                   <b>Cliente ID:</b> {{$clientes->id}}<br>
                   <b>Creado el:</b> {{$clientes->created_at}}<br>                  
+                </div>
+                <!-- /.col -->
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-xs-12">
+                  <img width="100%" height="100%" src="{{ asset('fotos/'.$clientes->avatar) }}">
+                </div>                
+                <!-- /.col -->
+                <div class="col-md-6 col-xs-12">
+                  <div class="row">
+                        <div class="col-md-12">
+                          <div class="card">
+                            {!!$map['html']!!}
+                          </div>
+                        </div>
+                  </div>                   
                 </div>
                 <!-- /.col -->
               </div>
@@ -52,6 +62,8 @@
                             <tr>
                             <th scope="col">#</th>                                                        
                             <th scope="col">Fecha</th>
+                            <th scope="col">Mes</th>
+                            <th scope="col">Año</th>
                             <th scope="col">Detalle</th>
                             <th scope="col">Responsable</th>
                             </tr>
@@ -61,6 +73,8 @@
                             <tr>
                                 <th scope="row">{{$item->id}}</th>
                                 <td>{{$item->created_at}}</td>
+                                <td>{{$item->mensualidad->mes}}</td>
+                                <td>{{$item->mensualidad->ano}}</td>
                                 <td>{{$item->detalle}}</td>
                                 <td>{{$item->usuario->name}}</td>                                  
                             </tr>
@@ -103,4 +117,7 @@
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
+@stop
+@section('js')
+<script type="text/javascript">var centreGot = false;</script>{!!$map['js']!!}
 @stop
