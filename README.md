@@ -11,7 +11,7 @@
 
 Se trata de una de mis primeras aplicaciones creadas por mí:
 
-PARA ESTA VERSIO : 
+PARA ESTA VERSION :
 Se actualizo el sistema de clientes, ahora es posible agregar fotos de los clientes al registrarlo
 tambien es posible ver su ubicacion en el mapa
 se agrego la tabla donde se puede ver las fechas de sus pagos y los meses
