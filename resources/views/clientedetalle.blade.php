@@ -3,120 +3,91 @@
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
-
 @section('content')
-<div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <!-- Main content -->
-            <div class="invoice p-3 mb-3">
-              <!-- title row -->
-              <div class="row">
-                <div class="col-12">
-                  <h4>
-                    <i class="fas fa-globe"></i> {{$clientes->nombre}}                    
-                  </h4>
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- info row -->
-              <div class="row">
-                <div class="col-6">
-                  <address>
+<div class="card card-solid">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-sm-6">
+              <h3 class="my-3"><i class="fas fa-user"></i> {{$clientes->nombre}}</h3>
+              <p><b>Fecha Actual:</b>  {{ now() }}<br>
+                  <b>Cliente ID:</b> {{$clientes->id}}<br>
+                  <b>Creado el:</b> {{$clientes->created_at}}<br>    </p>
+
+              <hr>
                     <i class="fas fa-building"></i><b> Direccion:</b> {{$clientes->direccion}}<br>
                     <i class="fas fa-phone"></i><b> Telefono:</b> <a href="https://api.whatsapp.com/send?phone=+51{{$clientes->telefono}}">+51 {{$clientes->telefono}}</a><br>
                     <i class="fas fa-envelope"></i><b> Email:</b> {{$clientes->email}}
-                  </address>
-                </div>                
-                <!-- /.col -->
-                <div class="col-6">
-                  <b>Fecha Actual:</b>  {{ now() }}<br>
-                  <b>Cliente ID:</b> {{$clientes->id}}<br>
-                  <b>Creado el:</b> {{$clientes->created_at}}<br>                  
-                </div>
-                <!-- /.col -->
-              </div>
-              <div class="row">
-                <div class="col-md-6 col-xs-12">
-                  <img width="100%" height="100%" src="{{ asset('fotos/'.$clientes->avatar) }}">
-                </div>                
-                <!-- /.col -->
-                <div class="col-md-6 col-xs-12">
-                  <div class="row">
-                        <div class="col-md-12">
-                          <div class="card">
-                            {!!$map['html']!!}
-                          </div>
-                        </div>
-                  </div>                   
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-
-              <!-- Table row -->
-              <div class="row">
-                <div class="col-12 table-responsive">
-                <table class="table table-striped">
-                        <thead>
-                            <tr>
-                            <th scope="col">#</th>                                                        
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Mes</th>
-                            <th scope="col">Año</th>
-                            <th scope="col">Detalle</th>
-                            <th scope="col">Responsable</th>
-                            </tr>
-                        </thead>
-                        <tbody>                        
-                        @foreach ($pagos as $item)
-                            <tr>
-                                <th scope="row">{{$item->id}}</th>
-                                <td>{{$item->created_at}}</td>
-                                <td>{{$item->mensualidad->mes}}</td>
-                                <td>{{$item->mensualidad->ano}}</td>
-                                <td>{{$item->detalle}}</td>
-                                <td>{{$item->usuario->name}}</td>                                  
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-
-              <div class="row">
-                <!-- accepted payments column -->
-                <div class="col-6">
-
-                  <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                    En el siguiente esquema se muestran los ultimos pagos realizados por el usuario, tener en cuenta depositos
-                    
-                  </p>
-                </div>
-                <!-- /.col -->
-                <div class="col-6">
-                  <p class="lead">Monto a cobrar</p>
-
-                  <div class="table-responsive">
-                      
-                    <table class="table">                      
-                      <tr>
-                        <th><h4>Total:</h4></th>
-                        <td style="background-color:green;"><b><h4>{{$clientes->precio}}</h4></b></td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->              
             </div>
-            <!-- /.invoice -->
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+            <div class="col-12 col-sm-6">              
+              <div class="col-12">
+                <img src="{{ asset('fotos/'.$clientes->avatar) }}" class="product-image" alt="Product Image">
+                <div class="bg-gray py-2 px-3 mt-4">
+                <h2 class="mb-0">
+                  S/{{$clientes->precio}}.00
+                </h2>
+              </div>
+              </div>
+            </div>           
+          </div>
+        <hr>
+        <div class="row">
+          <div class="col-12 col-sm-12">
+            <div class="card card-primary card-tabs">
+              <div class="card-header p-0 pt-1" style="background-color: #ffffff;">
+                <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" style="color:#007bff; " id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Pagos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" style="color:#007bff; " id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Ubicación</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="card-body">
+                <div class="tab-content" id="custom-tabs-one-tabContent">
+
+                  <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel" aria-labelledby="custom-tabs-one-home-tab">
+                     <div class="col-12 table-responsive">
+                      <table class="table table-striped">
+                              <thead>
+                                  <tr>
+                                  <th scope="col">#</th>                                                        
+                                  <th scope="col">Fecha</th>
+                                  <th scope="col">Mes</th>
+                                  <th scope="col">Año</th>
+                                  <th scope="col">Detalle</th>
+                                  <th scope="col">Responsable</th>
+                                  </tr>
+                              </thead>
+                              <tbody>                        
+                              @foreach ($pagos as $item)
+                                  <tr>
+                                      <th scope="row">{{$item->id}}</th>
+                                      <td>{{$item->created_at}}</td>
+                                      <td>{{$item->mensualidad->mes}}</td>
+                                      <td>{{$item->mensualidad->ano}}</td>
+                                      <td>{{$item->detalle}}</td>
+                                      <td>{{$item->usuario->name}}</td>                                  
+                                  </tr>
+                              @endforeach
+                              </tbody>
+                      </table>
+                  </div>
+                  </div>
+
+                  <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
+                     <div class="card"> {!!$map['html']!!} </div>
+                  </div>
+
+                </div>
+              </div>
+              <!-- /.card -->
+            </div>
+          </div>
+        </div>
+        </div>
+        <!-- /.card-body -->
+      </div>
 @stop
 @section('js')
 <script type="text/javascript">var centreGot = false;</script>{!!$map['js']!!}
