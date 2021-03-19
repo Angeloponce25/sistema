@@ -1,0 +1,58 @@
+{
+  "name": "genealabs/laravel-maps",
+  "description": "Eay - peasy map integration for Laravel.",
+  "license": "MIT",
+  "keywords": [
+    "laravel",
+    "phpgmaps",
+    "googlemaps",
+    "biostall"
+  ],
+  "authors": [
+    {
+      "name": "Mike Bronner",
+      "email": "mike@genealabs.com",
+      "role": "developer"
+    }
+  ],
+  "require": {
+    "illuminate/support": "^6.0"
+  },
+  "suggest": {
+    "geocoder-php/GeocoderLaravel": "If you need to geocode addresses and don't already have marker coordinates, use this package. It provides geocoding functionality optimized for Laravel."
+  },
+  "autoload": {
+    "psr-4": {
+      "GeneaLabs\\LaravelMaps\\": "src/"
+    }
+  },
+  "require-dev": {
+    "fzaninotto/faker": "^1.4",
+    "mockery/mockery": "^1.0",
+    "orchestra/testbench-browser-kit": "^4.0",
+    "orchestra/testbench-dusk": "^4.0",
+    "orchestra/testbench": "^4.0",
+    "php-coveralls/php-coveralls" : "*",
+    "phpmd/phpmd": "^2.7",
+    "phpunit/phpunit": "^8.0",
+    "sebastian/phpcpd": "^4.1",
+    "symfony/thanks": "^1.0"
+  },
+  "autoload-dev": {
+    "psr-4": {
+        "GeneaLabs\\LaravelMaps\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+      "laravel": {
+          "providers": [
+              "GeneaLabs\\LaravelMaps\\Providers\\Service"
+          ],
+          "aliases": {
+              "Map": "GeneaLabs\\LaravelMaps\\Facades\\Map"
+          }
+      }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
